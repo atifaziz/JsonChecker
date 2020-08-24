@@ -1,20 +1,66 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonChecker", "JsonChecker.csproj", "{021A0B09-B23E-4BD0-838E-DEAF59193EF7}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonCheckerTool", "src\JsonCheckerTool.csproj", "{70108D51-54BF-4540-8A66-A070E90C901B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BC8372B0-EE49-4F08-AA40-3DDCD95D116A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		appveyor.yml = appveyor.yml
+		build.cmd = build.cmd
+		build.sh = build.sh
+		COPYING.txt = COPYING.txt
+		global.json = global.json
+		pack.cmd = pack.cmd
+		pack.sh = pack.sh
+		README.md = README.md
+		test.cmd = test.cmd
+		test.sh = test.sh
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonCheckerTests", "tests\JsonCheckerTests.csproj", "{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{021A0B09-B23E-4BD0-838E-DEAF59193EF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{021A0B09-B23E-4BD0-838E-DEAF59193EF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{021A0B09-B23E-4BD0-838E-DEAF59193EF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{021A0B09-B23E-4BD0-838E-DEAF59193EF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Debug|x64.Build.0 = Debug|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Debug|x86.Build.0 = Debug|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Release|x64.ActiveCfg = Release|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Release|x64.Build.0 = Release|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Release|x86.ActiveCfg = Release|Any CPU
+		{70108D51-54BF-4540-8A66-A070E90C901B}.Release|x86.Build.0 = Release|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Debug|x64.Build.0 = Debug|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Release|x64.ActiveCfg = Release|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Release|x64.Build.0 = Release|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1B0EAF5-50B4-4FC9-94E7-6D8FBBB03EDE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91A903ED-AF2A-4093-A984-836C686A7089}
 	EndGlobalSection
 EndGlobal

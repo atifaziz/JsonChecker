@@ -17,19 +17,18 @@ JSON Checker reads the JSON text source from the standard input and emits a
 message on the standard error as soon as it encounters a syntax error. JSON
 Checker does not attempt to recover errors so it halts further processing once
 a syntax error has been detected. To check a file, use JSON Checker on the
-Windows Command Prompt as follows (replacing FILE with the actual file path):
+command line as follows (replacing `FILE` with the actual file path):
 
     $ jsonchk < FILE
-
-To check several files in a single run, consider using `FOR` like this:
-
-    $ for %i in (*.json) do jsonchk < %i
 
 
 ## Requirements
 
-JSON Checker requires requires Microsoft .NET Framework 2.0 to run and
-supports the same set of operating systems as the runtime.
+JSON Checker requires [.NET Core 3.1][dotnet-3.1] to run and supports the same
+set of operating systems as the runtime.
+
+  [dotnet-3.1]: https://dotnet.microsoft.com/download/dotnet-core/3.1
+
 
 ## License
 
