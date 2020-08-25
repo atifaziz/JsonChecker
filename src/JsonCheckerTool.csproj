@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>jsonchk</ToolCommandName>
+    <RootNamespace></RootNamespace>
     <VersionPrefix>1.1.0</VersionPrefix>
     <LangVersion>8</LangVersion>
     <Nullable>enable</Nullable>

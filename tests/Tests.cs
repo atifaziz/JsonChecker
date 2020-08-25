@@ -41,7 +41,7 @@ namespace JsonCheckerTests
                     json = reader.ReadToEnd();
             }
 
-            var checker = new JsonCheckerTool.JsonChecker(depth);
+            var checker = new JsonChecker(depth);
             foreach (var ch in json)
                 checker.Check(ch);
             checker.FinalCheck();

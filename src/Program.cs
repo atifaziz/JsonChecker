@@ -35,7 +35,7 @@ static class Program
 
             try
             {
-                var checker = new JsonCheckerTool.JsonChecker(20);
+                var checker = new JsonChecker(20);
                 for (var ch = reader.Read(); ch != -1; ch = reader.Read())
                     checker.Check(ch);
                 checker.FinalCheck();
