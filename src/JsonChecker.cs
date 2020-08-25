@@ -75,55 +75,54 @@ namespace JsonCheckerTool
     /// <a href="http://www.json.org/JSON_checker/">JSON_checker</a> program
     /// written in C.
     /// </remarks>
-
-    internal sealed class JsonChecker
+    sealed class JsonChecker
     {
-        private int _state;
-        private long _offset;
-        private readonly int _depth;
-        private readonly Stack<Mode> _stack;
+        int _state;
+        long _offset;
+        readonly int _depth;
+        readonly Stack<Mode> _stack;
 
-        private const int __ = -1;     /* the universal error code */
+        const int __ = -1;     /* the universal error code */
 
         /*
             Characters are mapped into these 31 character classes. This allows for
             a significant reduction in the size of the state transition table.
         */
 
-        private const int C_SPACE = 0;  /* space */
-        private const int C_WHITE = 1;  /* other whitespace */
-        private const int C_LCURB = 2;  /* {  */
-        private const int C_RCURB = 3;  /* } */
-        private const int C_LSQRB = 4;  /* [ */
-        private const int C_RSQRB = 5;  /* ] */
-        private const int C_COLON = 6;  /* : */
-        private const int C_COMMA = 7;  /* ; */
-        private const int C_QUOTE = 8;  /* " */
-        private const int C_BACKS = 9;  /* \ */
-        private const int C_SLASH = 10;  /* / */
-        private const int C_PLUS = 11;   /* + */
-        private const int C_MINUS = 12;  /* - */
-        private const int C_POINT = 13;  /* . */
-        private const int C_ZERO = 14;  /* 0 */
-        private const int C_DIGIT = 15;  /* 123456789 */
-        private const int C_LOW_A = 16;  /* a */
-        private const int C_LOW_B = 17;  /* b */
-        private const int C_LOW_C = 18;  /* c */
-        private const int C_LOW_D = 19;  /* d */
-        private const int C_LOW_E = 20;  /* e */
-        private const int C_LOW_F = 21;  /* f */
-        private const int C_LOW_L = 22;  /* l */
-        private const int C_LOW_N = 23;  /* n */
-        private const int C_LOW_R = 24;  /* r */
-        private const int C_LOW_S = 25;  /* s */
-        private const int C_LOW_T = 26;  /* t */
-        private const int C_LOW_U = 27;  /* u */
-        private const int C_ABCDF = 28;  /* ABCDF */
-        private const int C_E = 29;      /* E */
-        private const int C_ETC = 30;    /* everything else */
-        private const int NR_CLASSES = 31;
+        const int C_SPACE = 0;  /* space */
+        const int C_WHITE = 1;  /* other whitespace */
+        const int C_LCURB = 2;  /* {  */
+        const int C_RCURB = 3;  /* } */
+        const int C_LSQRB = 4;  /* [ */
+        const int C_RSQRB = 5;  /* ] */
+        const int C_COLON = 6;  /* : */
+        const int C_COMMA = 7;  /* ; */
+        const int C_QUOTE = 8;  /* " */
+        const int C_BACKS = 9;  /* \ */
+        const int C_SLASH = 10;  /* / */
+        const int C_PLUS = 11;   /* + */
+        const int C_MINUS = 12;  /* - */
+        const int C_POINT = 13;  /* . */
+        const int C_ZERO = 14;  /* 0 */
+        const int C_DIGIT = 15;  /* 123456789 */
+        const int C_LOW_A = 16;  /* a */
+        const int C_LOW_B = 17;  /* b */
+        const int C_LOW_C = 18;  /* c */
+        const int C_LOW_D = 19;  /* d */
+        const int C_LOW_E = 20;  /* e */
+        const int C_LOW_F = 21;  /* f */
+        const int C_LOW_L = 22;  /* l */
+        const int C_LOW_N = 23;  /* n */
+        const int C_LOW_R = 24;  /* r */
+        const int C_LOW_S = 25;  /* s */
+        const int C_LOW_T = 26;  /* t */
+        const int C_LOW_U = 27;  /* u */
+        const int C_ABCDF = 28;  /* ABCDF */
+        const int C_E = 29;      /* E */
+        const int C_ETC = 30;    /* everything else */
+        const int NR_CLASSES = 31;
 
-        private static readonly int[] ascii_class = new int[128]
+        static readonly int[] ascii_class = new int[128]
         {
         /*
             This array maps the 128 ASCII characters into character classes.
@@ -155,40 +154,39 @@ namespace JsonCheckerTool
             The state codes.
         */
 
-        private const int GO = 00;  /* start    */
-        private const int OK = 01;  /* ok       */
-        private const int OB = 02;  /* object   */
-        private const int KE = 03;  /* key      */
-        private const int CO = 04;  /* colon    */
-        private const int VA = 05;  /* value    */
-        private const int AR = 06;  /* array    */
-        private const int ST = 07;  /* string   */
-        private const int ES = 08;  /* escape   */
-        private const int U1 = 09;  /* u1       */
-        private const int U2 = 10;  /* u2       */
-        private const int U3 = 11;  /* u3       */
-        private const int U4 = 12;  /* u4       */
-        private const int MI = 13;  /* minus    */
-        private const int ZE = 14;  /* zero     */
-        private const int IN = 15;  /* integer  */
-        private const int FR = 16;  /* fraction */
-        private const int E1 = 17;  /* e        */
-        private const int E2 = 18;  /* ex       */
-        private const int E3 = 19;  /* exp      */
-        private const int T1 = 20;  /* tr       */
-        private const int T2 = 21;  /* tru      */
-        private const int T3 = 22;  /* true     */
-        private const int F1 = 23;  /* fa       */
-        private const int F2 = 24;  /* fal      */
-        private const int F3 = 25;  /* fals     */
-        private const int F4 = 26;  /* false    */
-        private const int N1 = 27;  /* nu       */
-        private const int N2 = 28;  /* nul      */
-        private const int N3 = 29;  /* null     */
-        private const int NR_STATES = 30;
+        const int GO = 00;  /* start    */
+        const int OK = 01;  /* ok       */
+        const int OB = 02;  /* object   */
+        const int KE = 03;  /* key      */
+        const int CO = 04;  /* colon    */
+        const int VA = 05;  /* value    */
+        const int AR = 06;  /* array    */
+        const int ST = 07;  /* string   */
+        const int ES = 08;  /* escape   */
+        const int U1 = 09;  /* u1       */
+        const int U2 = 10;  /* u2       */
+        const int U3 = 11;  /* u3       */
+        const int U4 = 12;  /* u4       */
+        const int MI = 13;  /* minus    */
+        const int ZE = 14;  /* zero     */
+        const int IN = 15;  /* integer  */
+        const int FR = 16;  /* fraction */
+        const int E1 = 17;  /* e        */
+        const int E2 = 18;  /* ex       */
+        const int E3 = 19;  /* exp      */
+        const int T1 = 20;  /* tr       */
+        const int T2 = 21;  /* tru      */
+        const int T3 = 22;  /* true     */
+        const int F1 = 23;  /* fa       */
+        const int F2 = 24;  /* fal      */
+        const int F3 = 25;  /* fals     */
+        const int F4 = 26;  /* false    */
+        const int N1 = 27;  /* nu       */
+        const int N2 = 28;  /* nul      */
+        const int N3 = 29;  /* null     */
+        const int NR_STATES = 30;
 
-
-        private static readonly int[,] state_transition_table = new int[NR_STATES, NR_CLASSES]
+        static readonly int[,] state_transition_table = new int[NR_STATES, NR_CLASSES]
         {
         /*
         The state transition table takes the current state and the current symbol,
@@ -235,7 +233,7 @@ namespace JsonCheckerTool
         */
 
         [Serializable]
-        private enum Mode
+        enum Mode
         {
             Array,
             Done,
@@ -413,7 +411,7 @@ namespace JsonCheckerTool
             Pop(Mode.Done);
         }
 
-        private void Push(Mode mode)
+        void Push(Mode mode)
         {
             /*
                 Push a mode onto the stack or throw if there is overflow.
@@ -424,7 +422,7 @@ namespace JsonCheckerTool
             _stack.Push(mode);
         }
 
-        private void Pop(Mode mode)
+        void Pop(Mode mode)
         {
             /*
                 Pop the stack, assuring that the current mode matches the expectation.
@@ -434,7 +432,7 @@ namespace JsonCheckerTool
                 OnError();
         }
 
-        private void OnError()
+        void OnError()
         {
             throw new Exception(string.Format("Invalid JSON text at character offset {0}.", _offset.ToString("N0")));
         }

@@ -36,9 +36,9 @@ namespace JsonCheckerTool
 
     #endregion
 
-    internal static class Program
+    static class Program
     {
-        private static int Main(string[] args)
+        static int Main(string[] args)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace JsonCheckerTool
             checker.FinalCheck();
         }
 
-        private static IEnumerable<char> ReadChars(TextReader reader)
+        static IEnumerable<char> ReadChars(TextReader reader)
         {
             Debug.Assert(reader != null);
 
