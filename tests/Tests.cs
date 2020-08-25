@@ -34,9 +34,12 @@ namespace JsonCheckerTests
         {
             string json;
 
-            using (var stream = typeof(Tests).Assembly.GetManifestResourceStream(name))
-            using (var reader = new StreamReader(stream))
-                json = reader.ReadToEnd();
+            using (var stream = typeof(Tests).Assembly.GetManifestResourceStream(name)
+                                ?? throw new Exception("Resource not found: " + name))
+            {
+                using (var reader = new StreamReader(stream))
+                    json = reader.ReadToEnd();
+            }
 
             var checker = new JsonCheckerTool.JsonChecker(depth);
             foreach (var ch in json)
