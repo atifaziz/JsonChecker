@@ -7,20 +7,20 @@
 //
 //      Atif Aziz, http://www.raboof.com
 //
-// This library is free software; you can redistribute it and/or modify it 
-// under the terms of the New BSD License, a copy of which should have 
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the New BSD License, a copy of which should have
 // been delivered along with this distribution.
 //
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
-// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY 
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+// PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 #endregion
@@ -65,17 +65,17 @@ namespace JsonCheckerTool
     #endregion
 
     /// <summary>
-    /// JsonChecker is a Pushdown Automaton that very quickly determines if a 
-    /// JSON text is syntactically correct. It could be used to filter inputs 
-    /// to a system, or to verify that the outputs of a system are 
+    /// JsonChecker is a Pushdown Automaton that very quickly determines if a
+    /// JSON text is syntactically correct. It could be used to filter inputs
+    /// to a system, or to verify that the outputs of a system are
     /// syntactically correct.
     /// </summary>
     /// <remarks>
-    /// This implementation is a C# port of the original 
-    /// <a href="http://www.json.org/JSON_checker/">JSON_checker</a> program 
+    /// This implementation is a C# port of the original
+    /// <a href="http://www.json.org/JSON_checker/">JSON_checker</a> program
     /// written in C.
     /// </remarks>
-    
+
     internal sealed class JsonChecker
     {
         private int _state;
@@ -123,7 +123,7 @@ namespace JsonCheckerTool
         private const int C_ETC = 30;    /* everything else */
         private const int NR_CLASSES = 31;
 
-        private static readonly int[] ascii_class = new int[128] 
+        private static readonly int[] ascii_class = new int[128]
         {
         /*
             This array maps the 128 ASCII characters into character classes.
@@ -188,7 +188,7 @@ namespace JsonCheckerTool
         private const int NR_STATES = 30;
 
 
-        private static readonly int[,] state_transition_table = new int[NR_STATES, NR_CLASSES] 
+        private static readonly int[,] state_transition_table = new int[NR_STATES, NR_CLASSES]
         {
         /*
         The state transition table takes the current state and the current symbol,
@@ -234,7 +234,7 @@ namespace JsonCheckerTool
             These modes can be pushed on the stack.
         */
 
-        [ Serializable ]
+        [Serializable]
         private enum Mode
         {
             Array,
@@ -409,7 +409,7 @@ namespace JsonCheckerTool
             */
             if (_state != OK)
                 OnError();
-            
+
             Pop(Mode.Done);
         }
 
