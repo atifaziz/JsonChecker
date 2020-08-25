@@ -64,15 +64,11 @@ namespace JsonCheckerTool
 
         public static void ValidateJsonText(TextReader reader)
         {
-            Debug.Assert(reader != null);
-
             ValidateJsonText(ReadChars(reader));
         }
 
         public static void ValidateJsonText(IEnumerable<char> chars)
         {
-            Debug.Assert(chars != null);
-
             JsonChecker checker = new JsonChecker(20);
             foreach (char ch in chars)
                 checker.Check(ch);
@@ -81,8 +77,6 @@ namespace JsonCheckerTool
 
         static IEnumerable<char> ReadChars(TextReader reader)
         {
-            Debug.Assert(reader != null);
-
             int ch = reader.Read();
             while (ch != -1)
             {

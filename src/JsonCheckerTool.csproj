@@ -7,6 +7,8 @@
     <ToolCommandName>jsonchk</ToolCommandName>
     <VersionPrefix>1.1.0</VersionPrefix>
     <LangVersion>8</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Title>JSON Checker</Title>
     <Description>JSON text validation tool</Description>
     <Authors>Atif Aziz</Authors>
