@@ -1,11 +1,4 @@
-#region License, Terms and Author(s)
-//
-// JSON Checker
-// Copyright (c) 2007 Atif Aziz. All rights reserved.
-//
-//  Author(s):
-//
-//      Atif Aziz, http://www.raboof.com
+#region Copyright (c) 2007 Atif Aziz. All rights reserved.
 //
 // This library is free software; you can redistribute it and/or modify it
 // under the terms of the New BSD License, a copy of which should have
@@ -25,64 +18,41 @@
 //
 #endregion
 
-namespace JsonCheckerTool
+using System;
+using System.Diagnostics;
+using System.IO;
+
+static class Program
 {
-    #region Imports
-
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-
-    #endregion
-
-    static class Program
+    static int Main(string[] args)
     {
-        static int Main(string[] args)
+        try
         {
+            var (close, reader)
+                = args.Length > 0
+                ? (true, File.OpenText(args[0]))
+                : (false, Console.In);
+
             try
             {
-                if (args.Length == 0)
-                {
-                    ValidateJsonText(Console.In);
-                }
-                else
-                {
-                    using (TextReader reader = File.OpenText(args[0]))
-                        ValidateJsonText(reader);
-                }
-
-                return 0;
+                var checker = new JsonCheckerTool.JsonChecker(20);
+                for (var ch = reader.Read(); ch != -1; ch = reader.Read())
+                    checker.Check(ch);
+                checker.FinalCheck();
             }
-            catch (Exception e)
+            finally
             {
-                Console.Error.WriteLine(e.GetBaseException().Message);
-                Trace.WriteLine(e.ToString());
-                return 1;
+                if (close)
+                    reader.Close();
             }
-        }
 
-        public static void ValidateJsonText(TextReader reader)
-        {
-            ValidateJsonText(ReadChars(reader));
+            return 0;
         }
-
-        public static void ValidateJsonText(IEnumerable<char> chars)
+        catch (Exception e)
         {
-            JsonChecker checker = new JsonChecker(20);
-            foreach (char ch in chars)
-                checker.Check(ch);
-            checker.FinalCheck();
-        }
-
-        static IEnumerable<char> ReadChars(TextReader reader)
-        {
-            int ch = reader.Read();
-            while (ch != -1)
-            {
-                yield return (char)ch;
-                ch = reader.Read();
-            }
+            Console.Error.WriteLine(e.GetBaseException().Message);
+            Trace.WriteLine(e.ToString());
+            return 1;
         }
     }
 }
