@@ -22,6 +22,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
+sealed partial class JsonChecker {}
+
 static class Program
 {
     static int Main(string[] args)

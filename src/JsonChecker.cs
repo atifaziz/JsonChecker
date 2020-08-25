@@ -69,7 +69,7 @@ using System.Collections.Generic;
 /// <a href="http://www.json.org/JSON_checker/">JSON_checker</a> program
 /// written in C.
 /// </remarks>
-sealed class JsonChecker
+partial class JsonChecker
 {
     int _state;
     long _offset;
